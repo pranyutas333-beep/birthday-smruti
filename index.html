@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Smruti 💖</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== GLOBAL ===== */
+*{
+  -webkit-tap-highlight-color: transparent;
+}
+
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  text-align:center;
+  background-color:#ffe6ee;
+}
+
+/* ===== PAGE SECTIONS ===== */
+.page{
+  display:none;
+  min-height:100vh;
+}
+
+#page1{
+  display:block;
+}
+
+/* ===== TEXT ===== */
+h1{
+  margin-top:120px;
+  color:#ff4d6d;
+  padding:0 15px;
+}
+
+button{
+  padding:16px 34px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d6d;
+  color:white;
+  cursor:pointer;
+}
+
+/* ===== I LOVE YOU POPUP ===== */
+#popup{
+  position:fixed;
+  inset:0;
+  background:#ffe6ee;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+#popup h2{
+  font-size:48px;
+  color:#ff4d6d;
+  animation:pop 1s ease;
+}
+
+@keyframes pop{
+  0%{transform:scale(0.2); opacity:0;}
+  100%{transform:scale(1); opacity:1;}
+}
+
+/* ===== MEMORY PAGE ===== */
+#memory{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+#memory img{
+  width:280px;
+  border-radius:22px;
+  margin-bottom:25px;
+  opacity:0;
+  transition:opacity 0.8s ease;
+}
+
+#quote{
+  font-size:18px;
+  max-width:600px;
+  line-height:1.6;
+  color:#333;
+  margin-bottom:30px;
+  opacity:0;
+  transition:opacity 0.8s ease;
+}
+
+.tap{
+  font-size:14px;
+  color:#777;
+  margin-top:15px;
+}
+
+/* ===== FINAL PAGE ===== */
+#page3{
+  padding:40px 20px;
+}
+
+/* ===== MUSIC ===== */
+audio{display:none;}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page">
+  <h1>Happy Birthday Smruti 💕</h1>
+  <button onclick="startCelebration()">Start Celebration 🎉</button>
+</div>
+
+<!-- POPUP -->
+<div id="popup">
+  <h2>I LOVE YOU 💖</h2>
+</div>
+
+<!-- PAGE 2 : MEMORY PAGE -->
+<div id="page2" class="page">
+  <div id="memory" onclick="nextMemory()">
+    <img id="photo" src="">
+    <div id="quote"></div>
+    <div class="tap">Tap anywhere to continue 💞</div>
+  </div>
+</div>
+
+<!-- FINAL PAGE -->
+<div id="page3" class="page">
+  <h1>Once again,<br>Happy Birthday Baba 💖</h1>
+
+  <p style="max-width:600px;margin:20px auto;color:#444;font-size:18px;line-height:1.6;">
+    Thank you for being my calm, my comfort, and my favorite part of every day.
+    I choose you — always.
+  </p>
+
+  <div style="margin-top:40px;font-size:14px;color:#888;">
+    Made with love by <span style="color:#ff4d6d;font-weight:bold;">Pranyuta</span> 💗
+  </div>
+</div>
+
+<audio id="music" src="music.mp3" loop></audio>
+
+<script>
+/* ===== PHOTOS & QUOTES ===== */
+const memories = [
+  { img: "s1.jpeg", text: "This moment reminds me how effortlessly you make everything around you feel warmer and safer. I didn’t know smiles could feel like home until you happened to me💙." },
+  { img: "s2.jpeg", text: "Every time I look at this picture, I realize how grateful I am that life chose you to walk beside me✨." },
+  { img: "s3.jpeg", text: "This was before us, yet somehow already about us🌼." },
+  { img: "s4.jpeg", text: "Some people bring noise into your life, but you bring calm😌." },
+  { img: "s5.jpeg", text: "This is one of those moments I want to freeze forever💐." },
+  { img: "s6.jpeg", text: "It wasn't about the place or the time, it was just you and me👩🏻‍❤️‍👨🏻." },
+  { img: "s7.jpeg", text: "A little sunshine, and a lot of you🌞." },
+  { img: "s8.jpeg", text: "I didn't expect this kind of calm, but I'm grateful it's you💛." },
+  { img: "s9.jpeg", text: "You are not just important to me — you are part of my everyday🫶🏻." },
+  { img: "s10.jpeg", text: "A special moment with you, and it meant more than it looks🌹." },
+  { img: "s12.jpeg", text: "I am good here with you🎀." },
+  { img: "s13.jpeg", text: "The way you get me, it means more than you know🤍." },
+  { img: "s14.jpeg", text: "Let me see you until my death🥰." },
+  { img: "s16.jpeg", text: "You're the only future I can see when I close my eyes💫." },
+  { img: "s17.jpeg", text: "When you get tired from this world, come fall in my arms🫂." }
+];
+
+let index = 0;
+
+/* ===== FLOW ===== */
+function startCelebration(){
+  document.getElementById("page1").style.display="none";
+  document.getElementById("popup").style.display="flex";
+
+  setTimeout(()=>{
+    document.getElementById("popup").style.display="none";
+    document.getElementById("page2").style.display="block";
+    const music = document.getElementById("music");
+    music.volume = 0.6;
+    music.play().catch(()=>{});
+    showMemory();
+  },2000);
+}
+
+function showMemory(){
+  const photo = document.getElementById("photo");
+  const quote = document.getElementById("quote");
+
+  photo.style.opacity = 0;
+  quote.style.opacity = 0;
+
+  setTimeout(()=>{
+    photo.src = memories[index].img;
+    quote.innerText = memories[index].text;
+    photo.style.opacity = 1;
+    quote.style.opacity = 1;
+  },300);
+}
+
+function nextMemory(){
+  if(index < memories.length - 1){
+    index++;
+    showMemory();
+  } else {
+    document.getElementById("page2").style.display="none";
+    document.getElementById("page3").style.display="block";
+  }
+}
+</script>
+
+</body>
+</html>
